@@ -4,9 +4,6 @@ I represent whole numbers in MAL.
 Class {
 	#name : #WMalInteger,
 	#superclass : #WMalType,
-	#instVars : [
-		'value'
-	],
 	#category : #WMal
 }
 
@@ -18,30 +15,4 @@ WMalInteger class >> withValue: aNumber [
 	instance := self new.
 	instance value: aNumber.
 	^ instance
-]
-
-{ #category : #comparing }
-WMalInteger >> = anObject [
-	self class = anObject class
-		ifTrue: [ ^ value = (anObject value) ]
-		ifFalse: [ ^ false ]
-]
-
-{ #category : #printing }
-WMalInteger >> printOn: aStream [
-	super printOn: aStream.
-	aStream
-		nextPutAll: '(';
-		nextPutAll: value printString ;
-		nextPutAll: ')'
-]
-
-{ #category : #accessing }
-WMalInteger >> value [
-^ value
-]
-
-{ #category : #accessing }
-WMalInteger >> value: anInteger [ 
-	value := anInteger 
 ]

@@ -12,15 +12,20 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-WMalReader class >> readAtom: aString [
+WMalReader class >> readAtom: aStream [
 	"Parse a single mal type."
 
-	^ WMalInteger withValue: aString asInteger
+	^ WMalInteger withValue: aStream next asInteger
 ]
 
 { #category : #'as yet unclassified' }
 WMalReader class >> readForm: aTokenStream [
-	^ self readAtom: (aTokenStream next)
+	^ self readAtom: aTokenStream
+]
+
+{ #category : #'as yet unclassified' }
+WMalReader class >> readList: aTokenStream [
+	^ self readAtom: aTokenStream
 ]
 
 { #category : #'as yet unclassified' }

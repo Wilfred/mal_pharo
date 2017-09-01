@@ -9,8 +9,9 @@ Class {
 
 { #category : #tests }
 WMalReaderTest >> testReadAtom [
-	| parsed expected |
-	parsed := WMalReader readAtom: '123'.
+	| parsed expected stream |
+	stream := (OrderedCollection with: '123') readStream.
+	parsed := WMalReader readAtom: stream.
 	expected := WMalInteger withValue: 123.
 	self assert: parsed equals: expected
 ]
