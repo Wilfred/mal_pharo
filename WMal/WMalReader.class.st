@@ -1,5 +1,5 @@
 "
-I convert tokens to (possibly nested) forms.
+I convert MAL source code to an AST of instance of WMalType.
 "
 Class {
 	#name : #WMalReader,
@@ -15,26 +15,46 @@ Class {
 WMalReader class >> readAtom: aStream [
 	"Parse a single mal type."
 
-	^ WMalInteger withValue: aStream next asInteger
+	| token |
+	token := aStream next.
+	token isAllDigits
+		ifTrue: [ ^ WMalInteger withValue: token asInteger ]
+		ifFalse: [ ^ WMalSymbol withValue: token ]
 ]
 
 { #category : #'as yet unclassified' }
 WMalReader class >> readForm: aTokenStream [
-	^ self readAtom: aTokenStream
+	| current |
+	current := aTokenStream peek.
+	current = '('
+		ifTrue: [ aTokenStream next.
+			^ self readList: aTokenStream ]
+		ifFalse: [ ^ self readAtom: aTokenStream ]
 ]
 
 { #category : #'as yet unclassified' }
 WMalReader class >> readList: aTokenStream [
-	^ self readAtom: aTokenStream
+	| items current finished |
+	items := OrderedCollection new.
+	finished := false.
+	[ finished ]
+		whileFalse: [ current := aTokenStream peek.
+			Transcript
+				show: current;
+				cr.
+			current = ')'
+				ifTrue: [ finished := true. aTokenStream next. ]
+				ifFalse: [ items add: (self readForm: aTokenStream) ] ].
+	self assert: current = ')' description: 'Unclosed ('.
+	^ WMalList withValue: items
 ]
 
 { #category : #'as yet unclassified' }
 WMalReader class >> readString: aString [
-	"Parse a string into mal types."
+	"Lex and parse a string of MAL source code."
 
 	| parsed tokens |
 	parsed := OrderedCollection new.
 	tokens := (WMalTokenizer withSource: aString) tokenize.
-	parsed add: (self readForm: tokens readStream).
-	^ parsed
+	^self readForm: tokens readStream
 ]

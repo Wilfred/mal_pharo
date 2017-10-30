@@ -3,6 +3,8 @@ I represent symbols in MAL.
 
 I use Smalltalk strings to represent  a MAL symbol rather than Smalltalk symbols. This is
 to avoid issues with MAL symbols that aren't valid Smalltalk symbols.
+
+Two symbols are equal if they have the same string value.
 "
 Class {
 	#name : #WMalSymbol,

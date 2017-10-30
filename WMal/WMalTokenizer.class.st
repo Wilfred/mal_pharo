@@ -43,7 +43,7 @@ WMalTokenizer >> source: aString [
 
 { #category : #'instance creation' }
 WMalTokenizer >> tokenize [
-	"Return the next valid token, or nil."
+	"Return a collection of all the tokens in our string."
 
 	| matcher result |
 	matcher := RxMatcher forString: TokenPattern.
@@ -51,5 +51,5 @@ WMalTokenizer >> tokenize [
 	matcher
 		matchesOnStream: source readStream
 		do: [ :s :m | result add: (m subexpression: 2) ].
-	^ result reject: [ :str | str isEmpty  ]
+	^ result reject: [ :str | str isEmpty ]
 ]

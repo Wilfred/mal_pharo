@@ -10,6 +10,16 @@ Class {
 	#category : #WMal
 }
 
+{ #category : #initialization }
+WMalType class >> withValue: aNumber [
+
+
+	| instance |
+	instance := self new.
+	instance value: aNumber.
+	^ instance
+]
+
 { #category : #comparing }
 WMalType >> = anObject [
 	self class = anObject class
