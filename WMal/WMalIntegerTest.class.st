@@ -18,3 +18,12 @@ WMalIntegerTest >> testEquality [
 	self assert: int1a = int1b.
 	self assert: int1a ~= int2
 ]
+
+{ #category : #tests }
+WMalIntegerTest >> testPrint [
+	"Ensure we can convert to a printable representation."
+
+	| int |
+	int := WMalInteger withValue: 123.
+	self assert: int print equals: '123'
+]

@@ -1,5 +1,5 @@
 "
-I convert MAL source code to an AST of instance of WMalType.
+I convert MAL source code to an AST instance of WMalType.
 "
 Class {
 	#name : #WMalReader,
@@ -18,8 +18,14 @@ WMalReader class >> readAtom: aStream [
 	| token |
 	token := aStream next.
 	token isAllDigits
-		ifTrue: [ ^ WMalInteger withValue: token asInteger ]
-		ifFalse: [ ^ WMalSymbol withValue: token ]
+		ifTrue: [ ^ WMalInteger withValue: token asInteger ].
+	token = 'nil'
+		ifTrue: [ ^ WMalNil new ].
+	token = 'true'
+		ifTrue: [ ^ WMalBool withValue: true ].
+	token = 'false'
+		ifTrue: [ ^ WMalBool withValue: false ].
+	^ WMalSymbol withValue: token
 ]
 
 { #category : #'as yet unclassified' }

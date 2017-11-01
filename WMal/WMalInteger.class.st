@@ -16,3 +16,8 @@ WMalInteger class >> withValue: aNumber [
 	instance value: aNumber.
 	^ instance
 ]
+
+{ #category : #accessing }
+WMalInteger >> print [
+	^ self value asString
+]

@@ -27,6 +27,11 @@ WMalType >> = anObject [
 		ifFalse: [ ^ false ]
 ]
 
+{ #category : #accessing }
+WMalType >> print [
+	self subclassResponsibility 
+]
+
 { #category : #printing }
 WMalType >> printOn: aStream [
 	super printOn: aStream.
