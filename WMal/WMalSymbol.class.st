@@ -28,3 +28,8 @@ WMalSymbol >> = anObject [
 
 	^self == anObject 
 ]
+
+{ #category : #accessing }
+WMalSymbol >> print [
+	^ value
+]

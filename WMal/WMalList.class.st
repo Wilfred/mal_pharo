@@ -8,6 +8,13 @@ Class {
 }
 
 { #category : #accessing }
+WMalList >> print [
+   | inner |
+inner := ' ' join: (value collect: #print).
+^ '(', inner, ')'
+]
+
+{ #category : #accessing }
 WMalList >> size [
 	^ value size
 ]

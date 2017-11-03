@@ -12,14 +12,14 @@ WMal >> eval: aForm [
 	^aForm
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #printing }
 WMal >> print: aValue [
-	^aValue
+	^ aValue print
 ]
 
-{ #category : #'as yet unclassified' }
-WMal >> read: aString [ 
-	^aString.
+{ #category : #'meta-object-protocol' }
+WMal >> read: aString [
+	^ WMalReader readString: aString
 ]
 
 { #category : #'as yet unclassified' }

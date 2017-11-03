@@ -6,3 +6,8 @@ Class {
 	#superclass : #WMalType,
 	#category : #WMal
 }
+
+{ #category : #accessing }
+WMalNil >> print [
+	^ 'nil'
+]
