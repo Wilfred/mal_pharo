@@ -28,6 +28,17 @@ WMalType >> = anObject [
 ]
 
 { #category : #accessing }
+WMalType >> call: args [
+"Try to call this value as a function."
+	WMalNotCallable signal: 'Not a function: ' , self print
+]
+
+{ #category : #accessing }
+WMalType >> evalIn: env [ 
+	^ self
+]
+
+{ #category : #accessing }
 WMalType >> print [
 	self subclassResponsibility 
 ]

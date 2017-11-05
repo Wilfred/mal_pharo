@@ -8,6 +8,13 @@ Class {
 }
 
 { #category : #accessing }
+WMalList >> evalIn: env [
+	self value size == 0 ifTrue: [ 
+		^ self
+		 ]
+]
+
+{ #category : #accessing }
 WMalList >> print [
    | inner |
 inner := ' ' join: (value collect: #print).

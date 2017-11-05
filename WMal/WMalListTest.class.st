@@ -8,6 +8,15 @@ Class {
 }
 
 { #category : #tests }
+WMalListTest >> testEvalEmpty [
+"Empty list should evaluate to itself."
+	| val items |
+	items := OrderedCollection new.
+	val := WMalList withValue: items.
+	self assert: (val evalIn: nil) equals: val
+]
+
+{ #category : #tests }
 WMalListTest >> testPrint [
 	| val first second items |
 	first := WMalInteger withValue: 1.

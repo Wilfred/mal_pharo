@@ -30,6 +30,11 @@ WMalSymbol >> = anObject [
 ]
 
 { #category : #accessing }
+WMalSymbol >> evalIn: env [
+	env at: self value ifPresent: [ :currentValue | ^currentValue ] ifAbsent: [ WMalUnboundSymbol signal: 'Unbound variable: ' , self value ]
+]
+
+{ #category : #accessing }
 WMalSymbol >> print [
 	^ value
 ]

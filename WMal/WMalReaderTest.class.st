@@ -67,3 +67,14 @@ WMalReaderTest >> testReadString [
 	parsed := WMalReader readString: '123'.
 	self assert: parsed equals: (WMalInteger withValue: 123)
 ]
+
+{ #category : #tests }
+WMalReaderTest >> testReadStringUnclosed [
+	self should: [ WMalReader readString: '(' ] raise: WMalSyntaxError
+]
+
+{ #category : #tests }
+WMalReaderTest >> testReadStringUnopened [
+"todo: We don't consider foo) to be a syntax error because we only read one form."
+	self should: [WMalReader readString: ')'] raise: WMalSyntaxError.
+]

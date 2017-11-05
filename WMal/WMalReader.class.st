@@ -1,5 +1,10 @@
 "
 I convert MAL source code to an AST instance of WMalType.
+
+To get started, use #readString:
+
+WMalReader readString: '(+ 1 2').
+
 "
 Class {
 	#name : #WMalReader,
@@ -17,6 +22,9 @@ WMalReader class >> readAtom: aStream [
 
 	| token |
 	token := aStream next.
+	token ifNil: [ WMalSyntaxError signal: 'Missing )' ].
+	token = ')'
+		ifTrue: [ WMalSyntaxError signal: 'Unexpected )' ].
 	token isAllDigits
 		ifTrue: [ ^ WMalInteger withValue: token asInteger ].
 	token = 'nil'

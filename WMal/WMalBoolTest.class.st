@@ -8,6 +8,13 @@ Class {
 }
 
 { #category : #tests }
+WMalBoolTest >> testEvalIn [
+	| val |
+	val := WMalBool withValue: false.
+	self assert: (val evalIn: nil) equals: val
+]
+
+{ #category : #tests }
 WMalBoolTest >> testPrint [
 | val|
 val := WMalBool withValue: false.
