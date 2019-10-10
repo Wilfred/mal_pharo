@@ -14,7 +14,7 @@ MalDivide class >> malName [
 
 { #category : #accessing }
 MalDivide >> call: args withContext: ctx [
-	"Divide args together. TODO: arity error"
+	"Divide the first argument by the others."
 
 	| result |
 	self ensure: args haveMinArity: 1.

@@ -14,7 +14,7 @@ MalAdd class >> malName [
 
 { #category : #evaluating }
 MalAdd >> call: args withContext: ctx [
-	"Add args together. TODO: type errors."
+	"Add args together."
 
 	| total |
 	self ensure: args haveType: MalInteger.
