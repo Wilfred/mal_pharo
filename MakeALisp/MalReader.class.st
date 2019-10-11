@@ -51,7 +51,8 @@ MalReader class >> readAtom: aStream [
 
 	| token firstChar |
 	token := aStream next.
-	token ifNil: [ MalSyntaxError signal: 'Missing ) ] or }' ].
+	token
+		ifNil: [ MalSyntaxError signal: 'unbalanced open paren: missing ) ] or }' ].
 	firstChar := token first: 1.
 	(self isClose: token)
 		ifTrue: [ MalSyntaxError signal: 'Unexpected ) ] or }' ].
