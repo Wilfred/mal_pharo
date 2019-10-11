@@ -18,6 +18,13 @@ MalStringTest >> testPrint [
 ]
 
 { #category : #tests }
+MalStringTest >> testReadMalformed [
+	"Ensure that an unclosed string literal produces a MalError."
+
+self should: [MalReader readString: '"foo'] raise: MalError
+]
+
+{ #category : #tests }
 MalStringTest >> testReadPrintRoundTrip [
 	"Ensure that reading and then printing a string gives us the original input."
 

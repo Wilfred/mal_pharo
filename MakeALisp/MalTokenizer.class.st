@@ -20,7 +20,9 @@ MalTokenizer class >> fromString: aString [
    in the regex engine (a range cannot contain [, see 
 	https://stackoverflow.com/questions/45824000/) and 
 	we ban carriage return/line feeds in comments."
-	pattern := '[\s,]*(~@|\[|\]|[{}()''`~^@]|"(\\.|[^\\"])*"|;[^', Character cr asString , Character lf asString , ']*|([^]\s{}(''"`,;)])*)'.
+	pattern := '[\s,]*(~@|\[|\]|[{}()''`~^@]|"(\\.|[^\\"])*"|;[^'
+		, Character cr asString , Character lf asString
+		, ']*|"|([^]\s{}(''"`,;)])*)'.
 	matcher := RxMatcher forString: pattern.
 	result := matcher
 		matchesOnStream: aString readStream

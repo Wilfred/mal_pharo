@@ -9,7 +9,6 @@ Class {
 
 { #category : #testing }
 MalStringLiteral class >> fromToken: token [
-"TODO: Check for a closing double-quote on string literals."
 	^ MalString withValue: (self stringContents: token)
 ]
 
@@ -22,6 +21,8 @@ MalStringLiteral class >> matches: aString [
 MalStringLiteral class >> stringContents: token [
 	| chars isEscape |
 	"Remove the double quotes and unescape a string literal."
+	token = '"'
+		ifTrue: [ MalError signal: 'unbalanced string literal (missing closing ")' ].
 	isEscape := false.
 	chars := OrderedCollection new.
 	token allButFirst allButLast
