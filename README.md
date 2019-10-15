@@ -8,6 +8,16 @@ MAL test suite.
 
 ## Code Organisation
 
+### Tests
+
+This implementation includes over 100 unit tests in the
+`MakeALisp-Tests` diretory. This is in addition to the invaluable MAL
+test suite.
+
+Smalltalk has brilliant TDD tooling and supports
+edit-and-continue-execution from the debugger, so it was often easier
+to start features/bugfixes with a unit test.
+
 ### Steps
 
 Most MAL implementation have a shared library of functionality, then a
@@ -18,7 +28,7 @@ Smalltalk is image oriented, so all the code is stored
 together. Maintaining 10 different images would be very cumbersome, so
 I've used the same implementation for all the steps.
 
-### `EVAL`
+### Dispatching Evaluation
 
 MAL convention is to implement evaluation using an `EVAL` function
 that switches on the name of special forms, and an `eval_ast` function
@@ -26,6 +36,24 @@ that switches on the runtime type (symbol, list, etc).
 
 Smalltalk strongly prefers dynamic dispatch here. See the `evalIn:`
 method on `MalList` for evaluation logic.
+
+### Dispatching Special Forms and Built-Ins
+
+Each special form (`if`, `let*`, etc) and built-in function (`+`,
+`cons`, etc) is a self-contained class. To avoid needing to register
+the classes elsewhere, each class implements `malName` and I use
+reflection to find the correct special form or function.
+
+This is from `MalSpecialForm`:
+
+```
+matchesSymbol: aSymbol
+	self
+		subclassesDo: [ :f |
+			f malName = aSymbol value
+				ifTrue: [ ^ f ] ].
+	^ nil
+```
 
 ### Tail-call Optimisation
 
