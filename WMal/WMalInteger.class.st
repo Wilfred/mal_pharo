@@ -32,8 +32,13 @@ WMalInteger >> printOn: aStream [
 	super printOn: aStream.
 	aStream
 		nextPutAll: '(';
-		nextPutAll: value asString;
-		nextPutAll: ')'.
+		nextPutAll: value printString ;
+		nextPutAll: ')'
+]
+
+{ #category : #accessing }
+WMalInteger >> value [
+^ value
 ]
 
 { #category : #accessing }

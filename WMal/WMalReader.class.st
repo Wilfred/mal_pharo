@@ -15,8 +15,7 @@ Class {
 WMalReader class >> readAtom: aString [
 	"Parse a single mal type."
 
-	|  |
-	^ WMalInteger withValue: aString
+	^ WMalInteger withValue: aString asInteger
 ]
 
 { #category : #'as yet unclassified' }

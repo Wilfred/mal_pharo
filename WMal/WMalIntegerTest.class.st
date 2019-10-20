@@ -16,5 +16,5 @@ WMalIntegerTest >> testEquality [
 	int1b := WMalInteger withValue: 1.
 	int2 := WMalInteger withValue: 2.
 	self assert: int1a = int1b.
-	self assert: (int1a = int2) not
+	self assert: int1a ~= int2
 ]
